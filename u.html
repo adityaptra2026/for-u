@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Untuk Kamu 🤍</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+      background: #0f0f14;
+      color: white;
+    }
+
+    /* =========================
+       BACKGROUND
+    ========================== */
+
+    .background {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, #ff719b55, transparent 30%),
+        radial-gradient(circle at 80% 80%, #b76cff44, transparent 30%),
+        linear-gradient(135deg, #111118, #24141d);
+      z-index: -2;
+    }
+
+    .blur {
+      position: fixed;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: .4;
+      animation: move 8s infinite alternate ease-in-out;
+    }
+
+    .blur.one {
+      background: #ff4f81;
+      top: -80px;
+      left: -80px;
+    }
+
+    .blur.two {
+      background: #8b5cf6;
+      bottom: -100px;
+      right: -80px;
+      animation-delay: 2s;
+    }
+
+    @keyframes move {
+      from {
+        transform: translate(0, 0);
+      }
+
+      to {
+        transform: translate(80px, 50px);
+      }
+    }
+
+    /* =========================
+       OPENING
+    ========================== */
+
+    .opening {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: rgba(10, 10, 15, .95);
+      z-index: 10;
+      transition: 1s ease;
+    }
+
+    .opening.hide {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(1.1);
+    }
+
+    .opening-content {
+      padding: 30px;
+    }
+
+    .opening-heart {
+      font-size: 75px;
+      margin-bottom: 20px;
+      animation: heartbeat 1.3s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.18);
+      }
+    }
+
+    .opening h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .opening p {
+      color: #c9bfc4;
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    .open-button {
+      border: none;
+      padding: 14px 28px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #ff5c8a, #d946ef);
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+      box-shadow: 0 0 30px #ff4f8166;
+      transition: .3s;
+    }
+
+    .open-button:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 45px #ff4f81aa;
+    }
+
+    /* =========================
+       MAIN CARD
+    ========================== */
+
+    .container {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card {
+      width: min(90%, 450px);
+      padding: 35px 30px;
+      text-align: center;
+
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      backdrop-filter: blur(18px);
+
+      border-radius: 28px;
+      box-shadow:
+        0 20px 70px rgba(0,0,0,.4),
+        inset 0 0 30px rgba(255,255,255,.03);
+
+      opacity: 0;
+      transform: translateY(40px);
+      transition: 1s ease;
+    }
+
+    .card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .small-heart {
+      font-size: 45px;
+      animation: heartbeat 1.5s infinite;
+      margin-bottom: 15px;
+    }
+
+    .card h1 {
+      font-size: 27px;
+      color: #ff91ae;
+      margin-bottom: 15px;
+    }
+
+    .typing {
+      min-height: 145px;
+      color: #eee;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .cursor {
+      color: #ff719b;
+      animation: blink .7s infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    /* =========================
+       BUTTON
+    ========================== */
+
+    .message-button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      border: 1px solid #ff719b88;
+      background: #ff719b18;
+      color: #ffadc1;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    .message-button:hover {
+      background: #ff719b;
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* =========================
+       SECRET MESSAGE
+    ========================== */
+
+    .secret {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: .8s ease;
+    }
+
+    .secret.active {
+      max-height: 300px;
+      opacity: 1;
+      margin-top: 20px;
+    }
+
+    .secret-box {
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      color: #e9dce1;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    /* =========================
+       MUSIC BUTTON
+    ========================== */
+
+    .music {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+
+      width: 48px;
+      height: 48px;
+
+      border-radius: 50%;
+      border: 1px solid #ffffff33;
+
+      background: rgba(255,255,255,.1);
+      backdrop-filter: blur(10px);
+
+      color: white;
+      cursor: pointer;
+      font-size: 20px;
+
+      z-index: 5;
+    }
+
+    .music.playing {
+      animation: rotate 3s linear infinite;
+    }
+
+    @keyframes rotate {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* =========================
+       FLOATING HEARTS
+    ========================== */
+
+    .heart {
+      position: fixed;
+      bottom: -30px;
+      pointer-events: none;
+      animation: floatUp linear forwards;
+      z-index: 1;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0) scale(.7) rotate(0);
+        opacity: 0;
+      }
+
+      15% {
+        opacity: .8;
+      }
+
+      to {
+        transform: translateY(-110vh) scale(1.3) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media (max-width: 500px) {
+
+      .opening h1 {
+        font-size: 23px;
+      }
+
+      .card {
+        padding: 30px 22px;
+      }
+
+      .card h1 {
+        font-size: 23px;
+      }
+
+      .typing {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Background -->
+  <div class="background"></div>
+  <div class="blur one"></div>
+  <div class="blur two"></div>
+
+
+  <!-- =========================
+       HALAMAN PEMBUKA
+  ========================== -->
+
+  <div class="opening" id="opening">
+
+    <div class="opening-content">
+
+      <div class="opening-heart">
+        🤍
+      </div>
+
+      <h1>Ini first aku buat coding..</h1>
+
+      <p>
+        Jangan langsung di close.<br>
+        Klik dulu, baru kamu tauu. :)
+      </p>
+
+      <button class="open-button" onclick="openWebsite()">
+        Buka ya pliss ✨
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       MAIN CONTENT
+  ========================== -->
+
+  <main class="container">
+
+    <div class="card" id="card">
+
+      <div class="small-heart">
+        💗
+      </div>
+
+      <h1>Hai, Mitaa.</h1>
+
+      <div class="typing">
+        <span id="typingText"></span>
+        <span class="cursor">|</span>
+      </div>
+
+
+      <button
+        class="message-button"
+        onclick="showSecret()"
+      >
+        Ada satu lagi... 💌
+      </button>
+
+
+      <div class="secret" id="secret">
+
+        <div class="secret-box">
+
+          Aku gak mau terlalu banyak
+          basa-basi atau bikin kamu risih.
+
+          <br><br>
+
+          Aku cuma mau bilang...
+
+          <br><br>
+
+          <b>
+            Aku seneng bisa kenal kamu.
+          </b>
+
+          <br>
+
+          you good person, pretty girl and strong woman
+         
+
+          <br><br>
+
+          i respect you, kaya gimana ya, ya kamu emang good person, dan welcome orangnya
+          asik dan ya sisanya aku simpen sendiri aja wkwkwkwk
+
+          <br>
+
+          ini aku buat tengah malem hahaha. 😅
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- =========================
+       MUSIC
+  ========================== -->
+
+  <audio id="music" loop>
+    <source src="i lay.mp3" type="audio/mpeg">
+  </audio>
+
+  <button
+    class="music"
+    id="musicButton"
+    onclick="toggleMusic()"
+  >
+    🎵
+  </button>
+
+
+  <script>
+
+    const opening = document.getElementById("opening");
+    const card = document.getElementById("card");
+    const music = document.getElementById("music");
+    const musicButton = document.getElementById("musicButton");
+
+    const textElement = document.getElementById("typingText");
+
+    /*
+      GANTI PESAN DI SINI
+    */
+
+    const message =
+      "Aku sebenarnya nggak tahu harus mulai dari mana. " +
+      "Tapi akhir-akhir ini, kaya chattan sama kamu selalu ya gimana ya jelasinnya " +
+      "kaya bikin aku ya begini lah kira kira hahahaha. " +
+      "Mungkin kedengerannya sederhana... " +
+      "tapi aku bener-bener seneng bisa kenal mu.";
+
+
+    /* =========================
+       BUKA WEBSITE
+    ========================== */
+
+    function openWebsite() {
+
+      opening.classList.add("hide");
+
+      setTimeout(() => {
+        card.classList.add("show");
+        startTyping();
+      }, 500);
+
+      /*
+        Beberapa browser memblokir autoplay,
+        tapi karena ini dipicu oleh klik,
+        musik biasanya bisa langsung dimainkan.
+      */
+
+      music.play().then(() => {
+        musicButton.classList.add("playing");
+      }).catch(() => {
+        console.log("Klik tombol musik untuk memainkan lagu.");
+      });
+
+      startHearts();
+
+    }
+
+
+    /* =========================
+       TYPEWRITER
+    ========================== */
+
+    let index = 0;
+
+    function startTyping() {
+
+      if (index < message.length) {
+
+        textElement.innerHTML += message.charAt(index);
+
+        index++;
+
+        setTimeout(startTyping, 45);
+
+      }
+
+    }
+
+
+    /* =========================
+       PESAN RAHASIA
+    ========================== */
+
+    function showSecret() {
+
+      const secret = document.getElementById("secret");
+
+      secret.classList.toggle("active");
+
+      /*
+        Tambahkan burst hati
+      */
+
+      for (let i = 0; i < 15; i++) {
+        createHeart();
+      }
+
+    }
+
+
+    /* =========================
+       MUSIC CONTROL
+    ========================== */
+
+    function toggleMusic() {
+
+      if (music.paused) {
+
+        music.play();
+
+        musicButton.classList.add("playing");
+
+      } else {
+
+        music.pause();
+
+        musicButton.classList.remove("playing");
+
+      }
+
+    }
+
+
+    /* =========================
+       FLOATING HEART
+    ========================== */
+
+    function createHeart() {
+
+      const heart = document.createElement("div");
+
+      heart.className = "heart";
+
+      const hearts = ["♥", "♡", "💗", "💖", "✨"];
+
+      heart.innerHTML =
+        hearts[Math.floor(Math.random() * hearts.length)];
+
+      heart.style.left =
+        Math.random() * 100 + "vw";
+
+      heart.style.fontSize =
+        (12 + Math.random() * 20) + "px";
+
+      heart.style.animationDuration =
+        (4 + Math.random() * 5) + "s";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 9000);
+
+    }
+
+
+    function startHearts() {
+
+      setInterval(() => {
+
+        createHeart();
+
+      }, 700);
+
+    }
+
+  </script>
+
+</body>
+</html>
